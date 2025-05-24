@@ -1,1 +1,1 @@
-web: gunicorn instagram.py
+gunicorn instagram_backend:app
