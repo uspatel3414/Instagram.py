@@ -1,1 +1,1 @@
-gunicorn instagram_backend:app
+web: gunicorn instagram_backend:app
