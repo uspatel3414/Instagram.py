@@ -18,6 +18,11 @@ import os
 from dataclasses import dataclass
 import logging
 
+
+@app.on_event("startup")
+async def startup_event():
+    # Create tables on startup
+    Base.metadata.create_all(bind=engine)
 # Configuration
 DATABASE_URL = os.getenv("DATABASE_URL")
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
@@ -30,6 +35,7 @@ INSTAGRAM_APP_SECRET = os.getenv("INSTAGRAM_APP_SECRET")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
+PORT = int(os.getenv("PORT", 8000))
 # Database setup
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
