@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: instagram-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn instagram_backend:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: INSTAGRAM_APP_ID
+        sync: false
+      - key: INSTAGRAM_APP_SECRET
+        sync: false
+
+databases:
+  - name: instagram-db
+    databaseName: instagram_assistant
+    user: instagram_user
